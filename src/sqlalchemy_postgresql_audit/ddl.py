@@ -56,6 +56,7 @@ def get_create_trigger_ddl(
         # or it is one of our session settings values
         else:
             if col.name in (
+                "audit_uuid",
                 "audit_operation",
                 "audit_operation_timestamp",
                 "audit_current_user",
