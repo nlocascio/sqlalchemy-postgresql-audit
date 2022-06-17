@@ -93,7 +93,7 @@ def create_audit_table(target, parent, primary_key=None):
         Column("audit_current_user", String(64), nullable=False),
     ])
 
-    session_setting_columns = [col.copy() for col in audit_spec["session_settings"]]
+    session_setting_columns = [col._copy() for col in audit_spec["session_settings"]]
     for col in session_setting_columns:
         col.name = "audit_{}".format(col.name)
     column_elements.extend(session_setting_columns)
