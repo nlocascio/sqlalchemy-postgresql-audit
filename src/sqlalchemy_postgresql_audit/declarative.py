@@ -54,7 +54,7 @@ def audit_model(_func=None, *, enabled=True, primary_key=default_primary_key, **
         ...     id = Column(types.Integer(), primary_key=True)
     """
     def decorated(model_cls):
-        model = create_audit_model(model_cls, enabled=enabled, **spec)
+        model = create_audit_model(model_cls, enabled=enabled, primary_key=primary_key, **spec)
         if model:
             model_cls.__audit_cls__ = model
 
@@ -141,7 +141,7 @@ def create_audit_table(table, metadata, *, enabled=True, primary_key=default_pri
     """
     existing_info = table.info
     existing_info['audit.options'] = {'enabled': enabled, **spec}
-    
+
     primary_key_column = primary_key() if primary_key else None
 
     return create_raw_audit_table(table, metadata, primary_key=primary_key_column)
